@@ -140,7 +140,7 @@ The openocd processes connects to the PicoProbe via USB
 The command for the openocd server is:
 
 ```
-openocd -s ${OPENOCD_DIR}/tcl/ -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
+openocd -s ${PICO_OPENOCD_DIR}/tcl/ -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
 
 ```
 
@@ -156,7 +156,7 @@ Connect you pico to a `picoprobe` and connect both to your development machine. 
 Start the `openocd server`. From the root of this project run:
 
 ```bash
-./run_openocd
+./run_openocd.sh
 ```
 
 This command starts a server which should continue to run until to kill it. The output should be somethng like:
@@ -201,9 +201,9 @@ show the program stopped at your selected breakpoint.
 If that did not work, I am sorry and I have failed. My #2 purpose for making this project was to give a clear and precise recipe
 for debugging c/c++ coded on a pico.
 
-My #1 purpose was so that I had a record of what I did. Some of this stuff is a bit less than obvious.
+My #1 purpose was so that I had a record of what I did. Some of this stuff is a bit less than obvious and my memory requires assistance.
 
-## Refernces
+## References
 
 Good website for rp2040 pwm explanation
 https://www.i-programmer.info/programming/hardware/14849-the-pico-in-c-basic-pwm.html?start=2
