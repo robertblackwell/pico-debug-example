@@ -203,6 +203,43 @@ for debugging c/c++ coded on a pico.
 
 My #1 purpose was so that I had a record of what I did. Some of this stuff is a bit less than obvious and my memory requires assistance.
 
+## Uarts and USB - output from this project
+
+If you examine the `CMakeLists.txt` file you will observer the two lines 
+
+```cmake
+pico_enable_stdio_usb(${TARGET} 1)
+pico_enable_stdio_uart(${TARGET} 1)
+
+```
+
+These lines cause `printf` (and all stdio input/output) output to got to both the default uart/serial port and the USB port. 
+
+The USB line that receives this io is the one plugged into the target pi pico board not the one plugged into the `pico debug probe`
+device.
+
+The serial io goes via GP0 and GP1 to the `pico debug probe` and then along the usb cable connected to that device to the host.
+
+On my Ubuntu machine these connections appear as `/dev/ttyACM0` and `/dev/ttyACM1`.
+
+If you connect `minicom` or someother terminal program to these devices you will see the output appear on both.
+
+If you change the CMakeLists.txt file to either
+
+```cmake
+pico_enable_stdio_usb(${TARGET} 1)
+pico_enable_stdio_uart(${TARGET} 0)
+
+```
+or 
+```cmake
+pico_enable_stdio_usb(${TARGET} 0)
+pico_enable_stdio_uart(${TARGET} 1)
+
+```
+
+output will appear only on one of the `/dev/ttyACMx` ports.
+
 ## References
 
 Good website for rp2040 pwm explanation

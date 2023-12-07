@@ -40,17 +40,17 @@ endif()
 
 set(PICO_ROBOT_PATH ${PROJECT_SOURCE_DIR})
 # set(PIC_CXX_ENABLE_EXCEPTIONS 1)
-
+set(TARGET debug_blinky)
 # Initialize the SDK
 pico_sdk_init()
 
 # add_subdirectory(src)
-set(TARGET debug_blinky)
-add_executable(debug_blinky src/debug_blinky.cpp)
-pico_enable_stdio_usb(debug_blinky 1)
-pico_enable_stdio_uart(debug_blinky 1)
-pico_add_extra_outputs(debug_blinky)
-target_link_libraries(debug_blinky pico_stdlib pico_unique_id)
+set(TARGET ${TARGET})
+add_executable(${TARGET} src/debug_blinky.cpp)
+pico_enable_stdio_usb(${TARGET} 1)
+pico_enable_stdio_uart(${TARGET} 1)
+pico_add_extra_outputs(${TARGET})
+target_link_libraries(${TARGET} pico_stdlib pico_unique_id)
 # add_compile_options(-Wall
 #         -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long int
 #         -Wno-unused-function # we have some for the docs that aren't called
